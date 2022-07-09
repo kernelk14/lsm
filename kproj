@@ -1,0 +1,5 @@
+file "main.py"
+title "lsm"
+project run
+repo init
+repo create
