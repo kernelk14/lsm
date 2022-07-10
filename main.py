@@ -2,8 +2,10 @@
 
 # LSM: Like aSseMbly. (like assembly)
 
-program = 'start: move 5 to reg1'.split()
+# program = 'start: move 5 to reg1'.split()
 
+file = open("test.lsm", 'r')
+program = file.read().split()
 ip = 0
 
 stack = []
@@ -13,9 +15,13 @@ reg3 = []
 
 for ip in range(len(program)):
     code = program[ip]
+    print(f"Stack: {stack}")
     if code.endswith(':'):
         if code.startswith('start'):
             print("Scanning starting point")
+        elif not code.startswith('start'):
+            print("ERROR: No starting point found.")
+            exit(1)
         else:
             print("No starting point found.")
         ip += 1
@@ -30,12 +36,15 @@ for ip in range(len(program)):
         if program[ip + 1] == 'reg1':
             a = stack.pop()
             reg1.append(a)
+            print(f"Register 1: {reg1}")
         if program[ip + 1] == 'reg2':
             a = stack.pop()
             reg2.append(a)
+            print(f"Register 2: {reg2}")
         if program[ip + 1] == 'reg3':
             a = stack.pop()
             reg3.append(a)
+            print(f"Register 3: {reg3}")
         else:
             if program[ip+1] == 'reg1':
                 ip += 1
